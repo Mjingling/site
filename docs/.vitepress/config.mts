@@ -68,7 +68,7 @@ function sectionSidebar(section: string, categories: SectionCategories, label: s
 export default defineConfig({
   lang: 'zh-CN',
   title: '小枫学幽默的小站',
-  description: '个人介绍、小工具、代码片段与捐赠',
+  description: '云之家计算公式手册（61 函数）、JS SDK 个性化开发指南、最佳实践场景、效率小工具与代码片段',
 
   base,
 

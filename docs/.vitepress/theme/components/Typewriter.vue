@@ -4,9 +4,10 @@ import { onMounted, onBeforeUnmount, ref } from 'vue'
 // 轮播标语：换成你想展示的任意句子
 const PHRASES = [
   '🔧 云之家个性化开发实战笔记',
-  '📖 61 篇计算公式函数手册',
-  '🧩 iframe 助手 Chrome 扩展',
-  '🤖 智能体 & 常用代码片段'
+  '📚 61 个计算公式函数速查',
+  '⚡ 19 篇 JS SDK API 片段',
+  '🎯 12 个最佳实践完整场景',
+  '🧩 iframe 助手 + VSCode 补全插件'
 ]
 
 const text = ref('')

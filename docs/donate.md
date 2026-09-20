@@ -1,29 +1,15 @@
 ---
 title: 捐赠
-description: 【请替换】如果内容对你有帮助，欢迎请我喝杯咖啡
+description: 如果内容对你有帮助，欢迎请我喝杯咖啡
 ---
 
 # 捐赠
 
-如果这个站点的内容对你有帮助，欢迎请我喝杯咖啡 ☕ 你的支持是我持续更新的动力。
+如果这个站的内容帮你省了时间，欢迎请我喝杯咖啡 ☕ 你的支持是我持续更新的动力。
 
 ## 在线捐赠
 
-<!-- 【请替换】两个链接分别改为你的爱发电主页与 PayPal.Me；品牌色：爱发电实心、PayPal 描边 -->
-<div style="display:flex;flex-wrap:wrap;gap:16px;margin:8px 0 24px;">
-  <a
-    href="https://afdian.com/a/yourname"
-    target="_blank"
-    rel="noopener"
-    style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:9999px;background:#946ce6;color:#ffffff;text-decoration:none;font-weight:600;box-shadow:0 2px 8px rgba(148,108,230,0.45);"
-  >💜 爱发电</a>
-  <a
-    href="https://www.paypal.com/paypalme/yourname"
-    target="_blank"
-    rel="noopener"
-    style="display:inline-flex;align-items:center;gap:8px;padding:12px 28px;border-radius:9999px;border:2px solid #0070ba;color:#0070ba;background:transparent;text-decoration:none;font-weight:600;"
-  >🅿️ PayPal</a>
-</div>
+> 爱发电 / PayPal 入口筹备中，开通后第一时间更新到这里。
 
 ## 收款码
 

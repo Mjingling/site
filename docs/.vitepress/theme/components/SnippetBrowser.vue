@@ -46,6 +46,29 @@ function toggleTag(tag) {
   activeTag.value = activeTag.value === tag ? '' : tag
 }
 
+// 点击卡片上的标签：直接选中该标签（不同于胶囊的切换语义）
+function selectTag(tag) {
+  activeTag.value = tag
+}
+
+// 常见语言徽章配色（浅底深字，深浅色模式都清晰）
+const LANG_COLORS = {
+  js: { bg: 'rgba(240, 219, 79, 0.25)', fg: '#b99000' },
+  javascript: { bg: 'rgba(240, 219, 79, 0.25)', fg: '#b99000' },
+  ts: { bg: 'rgba(49, 120, 198, 0.2)', fg: '#2f6cb3' },
+  typescript: { bg: 'rgba(49, 120, 198, 0.2)', fg: '#2f6cb3' },
+  python: { bg: 'rgba(55, 118, 171, 0.2)', fg: '#3776ab' },
+  css: { bg: 'rgba(41, 101, 241, 0.18)', fg: '#2965f1' },
+  html: { bg: 'rgba(227, 76, 38, 0.18)', fg: '#d84b1e' },
+  shell: { bg: 'rgba(120, 130, 150, 0.22)', fg: '#6b7280' },
+  bash: { bg: 'rgba(120, 130, 150, 0.22)', fg: '#6b7280' }
+}
+
+function langStyle(lang) {
+  const c = LANG_COLORS[String(lang).toLowerCase()]
+  return c ? { background: c.bg, color: c.fg } : {}
+}
+
 function pageLink(file) {
   return withBase(`/snippets/${file}.html`)
 }
@@ -88,11 +111,21 @@ function anchorLink(file, anchor) {
       <article v-for="item in filtered" :key="item.file" class="snippet-card">
         <div class="snippet-card-head">
           <a :href="pageLink(item.file)" class="snippet-card-title">{{ item.title }}</a>
-          <span class="snippet-lang">{{ item.lang }}</span>
+          <span class="snippet-lang" :style="langStyle(item.lang)">{{ item.lang }}</span>
         </div>
         <div class="snippet-card-meta">
           <time :datetime="item.date">{{ item.date }}</time>
-          <span v-for="t in item.tags" :key="t" class="snippet-card-tag"># {{ t }}</span>
+          <button
+            v-for="t in item.tags"
+            :key="t"
+            type="button"
+            class="snippet-card-tag"
+            :class="{ active: t === activeTag }"
+            title="按此标签筛选"
+            @click.stop="selectTag(t)"
+          >
+            # {{ t }}
+          </button>
         </div>
         <ul v-if="item.sections && item.sections.length" class="snippet-sections">
           <li v-for="s in item.sections" :key="s.anchor">
@@ -228,7 +261,23 @@ function anchorLink(file, anchor) {
 }
 
 .snippet-card-tag {
+  padding: 0;
+  border: none;
+  background: none;
+  font-size: 12px;
+  cursor: pointer;
   color: var(--vp-c-brand-1);
+  transition: opacity 0.2s;
+}
+
+.snippet-card-tag:hover {
+  opacity: 0.7;
+  text-decoration: underline;
+}
+
+.snippet-card-tag.active {
+  font-weight: 600;
+  text-decoration: underline;
 }
 
 .snippet-sections {

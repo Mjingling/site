@@ -17,7 +17,7 @@ from xml.sax.saxutils import escape
 SITE_URL = "https://mjingling.github.io/site"  # 站点完整地址，不带末尾斜杠；换仓库名/自定义域名时记得同步修改
 SITE_TITLE = "小枫学幽默的小站"
 SITE_AUTHOR = "小枫学幽默"
-SITE_DESCRIPTION = "个人介绍、小工具、代码片段与捐赠"
+SITE_DESCRIPTION = "云之家计算公式手册、JS SDK 个性化开发指南、最佳实践与效率工具"
 MAX_ITEMS = 20
 # ============================================
 

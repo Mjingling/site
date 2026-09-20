@@ -5,6 +5,7 @@ import { nextTick, onMounted, watch } from 'vue'
 import BackToTop from './components/BackToTop.vue'
 import HeroAurora from './components/HeroAurora.vue'
 import Typewriter from './components/Typewriter.vue'
+import SiteFooter from './components/SiteFooter.vue'
 
 const { Layout } = DefaultTheme
 const route = useRoute()
@@ -28,6 +29,7 @@ onMounted(async () => {
   <Layout>
     <!-- 挂在 layout-bottom 插槽：不覆盖默认导航与侧边栏 -->
     <template #layout-bottom>
+      <SiteFooter />
       <BackToTop />
     </template>
 
