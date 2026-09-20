@@ -85,7 +85,9 @@ date: 2026-09-20
 | 捐赠按钮 / 收款码 / 公众号引流 | `docs/donate.md` |
 | 片段总览页文案 | `docs/snippets/index.md` |
 | 计算公式函数手册 | `docs/yunzhijia-formulas/<分类>/` 下新增 md（分类：`math`/`date`/`text`/`logic`/`advanced`/`data`，与表单设计器源码一致；命名 `NN-函数名.md`，顶部写 `title`），侧边栏自动分组（需重启 dev / 重新构建） |
-| 云之家个性化开发板块 | `docs/yunzhijia.md` |
+| 云之家个性化开发板块 | `docs/yunzhijia.md`（导航主页，下拉菜单入口） |
+| JS SDK 片段 | `docs/yunzhijia-sdk/<分类>/` 下新增 md（分类：`form`/`flow`/`event`/`ui`/`request`/`helper`，与 cloudflow-js-sdk 文档一致） |
+| 个性化最佳实践 | `docs/yunzhijia-best-practices/` 下新增 `NN-场景名.md` |
 | 新增片段 | `docs/snippets/` 下新建 md |
 | 片段索引生成逻辑 | `scripts/gen-snippets-index.mjs` |
 | RSS 站点信息 | `scripts/gen_rss.py` 顶部常量 |

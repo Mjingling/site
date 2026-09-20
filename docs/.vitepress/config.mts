@@ -9,9 +9,11 @@ import { defineConfig } from 'vitepress'
 //   仓库为「用户名.github.io」→ '/'，否则 → '/仓库名/'
 const base = process.env.BASE_PATH || '/'
 
-// 「云之家计算公式」侧边栏：总览置顶，函数按分类目录（与 cloudflow 源码
-// FormFormula/functions/ 的分类一致）自动分组；新增 md 后需重启 dev / 重新构建
-const FORMULA_CATEGORIES: Array<[dir: string, label: string]> = [
+// 「云之家」系列板块侧边栏：总览置顶 + 按分类子目录自动分组
+// （新增 md 后需重启 dev / 重新构建）
+type SectionCategories = Array<[dir: string, label: string]>
+
+const FORMULA_CATEGORIES: SectionCategories = [
   ['math', '数学函数'],
   ['date', '日期函数'],
   ['text', '文本函数'],
@@ -20,8 +22,17 @@ const FORMULA_CATEGORIES: Array<[dir: string, label: string]> = [
   ['data', '数据函数']
 ]
 
-function formulaSidebar() {
-  const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../yunzhijia-formulas')
+const SDK_CATEGORIES: SectionCategories = [
+  ['form', '表单字段'],
+  ['flow', '流程信息'],
+  ['event', '事件钩子'],
+  ['ui', '界面交互'],
+  ['request', '网络请求'],
+  ['helper', '环境与工具']
+]
+
+function sectionSidebar(section: string, categories: SectionCategories, label: string) {
+  const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..', section)
   if (!fs.existsSync(dir)) return []
 
   const toItem = (fullPath: string, link: string) => ({
@@ -35,21 +46,21 @@ function formulaSidebar() {
     .readdirSync(dir)
     .filter((f) => f.endsWith('.md') && f !== 'index.md')
     .sort()
-    .map((f) => toItem(path.join(dir, f), `/yunzhijia-formulas/${f.replace(/\.md$/, '')}`))
+    .map((f) => toItem(path.join(dir, f), `/${section}/${f.replace(/\.md$/, '')}`))
 
-  const groups = FORMULA_CATEGORIES.filter(([cat]) => fs.existsSync(path.join(dir, cat))).map(
-    ([cat, label]) => ({
-      text: label,
+  const groups = categories
+    .filter(([cat]) => fs.existsSync(path.join(dir, cat)))
+    .map(([cat, catLabel]) => ({
+      text: catLabel,
       collapsed: true,
       items: fs
         .readdirSync(path.join(dir, cat))
         .filter((f) => f.endsWith('.md'))
         .sort()
-        .map((f) => toItem(path.join(dir, cat, f), `/yunzhijia-formulas/${cat}/${f.replace(/\.md$/, '')}`))
-    })
-  )
+        .map((f) => toItem(path.join(dir, cat, f), `/${section}/${cat}/${f.replace(/\.md$/, '')}`))
+    }))
 
-  return [{ text: '总览', items: overview }, ...groups]
+  return [{ text: label, items: [{ text: '总览', items: overview }, ...groups] }]
 }
 
 export default defineConfig({
@@ -67,16 +78,25 @@ export default defineConfig({
       { text: '关于我', link: '/about' },
       { text: '小工具', link: '/tools' },
       { text: '代码片段', link: '/snippets/' },
-      { text: '云之家个性化开发', link: '/yunzhijia' },
+      {
+        text: '云之家个性化开发',
+        items: [
+          { text: '开发概览', link: '/yunzhijia' },
+          { text: 'JS SDK 片段', link: '/yunzhijia-sdk/' },
+          { text: '最佳实践', link: '/yunzhijia-best-practices/' }
+        ]
+      },
       { text: '云之家计算公式', link: '/yunzhijia-formulas/' },
       { text: '捐赠', link: '/donate' }
     ],
 
     socialLinks: [{ icon: 'github', link: 'https://github.com/Mjingling' }],
 
-    // 云之家计算公式：函数手册侧边栏（自动生成）
+    // 云之家系列：侧边栏（自动生成）
     sidebar: {
-      '/yunzhijia-formulas/': [{ text: '计算公式函数手册', items: formulaSidebar() }]
+      '/yunzhijia-formulas/': sectionSidebar('yunzhijia-formulas', FORMULA_CATEGORIES, '计算公式函数手册'),
+      '/yunzhijia-sdk/': sectionSidebar('yunzhijia-sdk', SDK_CATEGORIES, 'JS SDK 片段'),
+      '/yunzhijia-best-practices/': sectionSidebar('yunzhijia-best-practices', [], '最佳实践')
     },
 
     // 本地全文搜索：结果直接展示代码内容（detailedView），界面已汉化
