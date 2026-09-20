@@ -12,9 +12,9 @@
   --vp-c-brand-3: #8b5cf6;
   --vp-c-brand-soft: rgba(124, 58, 237, 0.14);
 
-  /* hero 主标题：紫→粉渐变文字（默认主题提供的官方变量） */
+  /* hero 主标题：紫→粉→紫三色循环渐变（配合下方流光动画） */
   --vp-home-hero-name-color: transparent;
-  --vp-home-hero-name-background: linear-gradient(120deg, #7c3aed 10%, #ec4899 90%);
+  --vp-home-hero-name-background: linear-gradient(120deg, #7c3aed, #ec4899, #7c3aed);
 
   /* 头像背后的渐变光晕 */
   --vp-home-hero-image-background-image: linear-gradient(-45deg, #7c3aed 45%, #ec4899 55%);
@@ -39,6 +39,70 @@
 .VPHero .image-src {
   border-radius: 50%;
   box-shadow: 0 6px 28px rgba(124, 58, 237, 0.35);
+}
+
+/* ================= 首页动效 ================= */
+
+/* hero 内容压在极光装饰（HeroAurora）之上 */
+.VPHero {
+  position: relative;
+  z-index: 1;
+}
+
+/* 主标题流光：渐变背景位移动画 */
+.VPHero .name {
+  background-size: 200% auto;
+  animation: hero-name-flow 6s linear infinite;
+}
+
+@keyframes hero-name-flow {
+  to {
+    background-position: 200% center;
+  }
+}
+
+/* 头像上下浮动 */
+.VPHero .image-src {
+  animation: hero-float 6s ease-in-out infinite;
+}
+
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* 板块卡片：悬浮上移 + 品牌色描边 + 图标微动 */
+.VPFeatures .VPFeature {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.VPFeatures .VPFeature:hover {
+  transform: translateY(-4px);
+  border-color: var(--vp-c-brand-3);
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.16);
+}
+
+.VPFeatures .VPFeature .icon {
+  transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.VPFeatures .VPFeature:hover .icon {
+  background: var(--vp-c-brand-soft);
+  transform: rotate(-6deg) scale(1.1);
+}
+
+/* 尊重系统「减弱动态效果」设置 */
+@media (prefers-reduced-motion: reduce) {
+  .VPHero .name,
+  .VPHero .image-src,
+  .aurora-blob {
+    animation: none !important;
+  }
 }
 
 /* ---------- 二维码图片：白底圆角卡片 ----------

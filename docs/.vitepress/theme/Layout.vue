@@ -3,6 +3,8 @@ import DefaultTheme from 'vitepress/theme'
 import { useRoute } from 'vitepress'
 import { nextTick, onMounted, watch } from 'vue'
 import BackToTop from './components/BackToTop.vue'
+import HeroAurora from './components/HeroAurora.vue'
+import Typewriter from './components/Typewriter.vue'
 
 const { Layout } = DefaultTheme
 const route = useRoute()
@@ -27,6 +29,14 @@ onMounted(async () => {
     <!-- 挂在 layout-bottom 插槽：不覆盖默认导航与侧边栏 -->
     <template #layout-bottom>
       <BackToTop />
+    </template>
+
+    <!-- 首页 hero 装饰：极光背景 + 打字机标语 -->
+    <template #home-hero-before>
+      <HeroAurora />
+    </template>
+    <template #home-hero-actions-after>
+      <Typewriter />
     </template>
   </Layout>
 </template>
