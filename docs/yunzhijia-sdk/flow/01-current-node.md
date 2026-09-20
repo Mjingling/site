@@ -1,5 +1,5 @@
 ---
-title: 获取当前流程节点 getCurrentFlowNode
+title: 获取当前流程节点
 ---
 
 # 获取当前流程节点信息

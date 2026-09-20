@@ -1,5 +1,5 @@
 ---
-title: 多语言环境 cf.env
+title: 多语言环境
 ---
 
 # 多语言环境（cf.env）

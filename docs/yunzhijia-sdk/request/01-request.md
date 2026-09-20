@@ -1,8 +1,8 @@
 ---
-title: 网络请求 cf.request
+title: 网络请求
 ---
 
-# 网络请求 cf.request
+# 网络请求
 
 ## 什么时候用
 

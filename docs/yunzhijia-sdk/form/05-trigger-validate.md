@@ -1,5 +1,5 @@
 ---
-title: 触发字段校验 triggerFieldValidate
+title: 触发字段校验
 ---
 
 # 触发表单字段校验

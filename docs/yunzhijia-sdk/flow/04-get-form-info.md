@@ -1,5 +1,5 @@
 ---
-title: 获取表单模板信息 getFormInfo
+title: 获取表单模板信息
 ---
 
 # 获取表单模板信息

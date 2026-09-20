@@ -1,5 +1,5 @@
 ---
-title: 获取表单字段值 getFieldValue
+title: 获取表单字段值
 ---
 
 # 获取表单字段值

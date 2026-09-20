@@ -1,5 +1,5 @@
 ---
-title: 移除事件钩子 removeEventHook
+title: 移除事件钩子
 ---
 
 # 移除事件钩子
