@@ -9,6 +9,7 @@ description: 【请替换】我做的小工具与朋友们的站点
 
 | 名称 | 简介 | 链接 |
 | --- | --- | --- |
+| iframe 助手 | Chrome 扩展（Manifest V3）：给网页里的 iframe 加悬浮工具条——修改网址、新窗口打开、复制链接、刷新、一键全屏；工具可拖拽排序、支持无字模式，自带 DevTools「Iframe 检查器」面板，简/繁/英三语 | [源码](https://gitee.com/speed_turbo/iframe-helper) |
 | 【工具一】【请替换】 | 一句话说明它解决什么问题 | [前往](https://example.com) |
 | 【工具二】【请替换】 | 一句话说明它解决什么问题 | [前往](https://example.com) |
 | 【工具三】【请替换】 | 一句话说明它解决什么问题 | [前往](https://example.com) |
