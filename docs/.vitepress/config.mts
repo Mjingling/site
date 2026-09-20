@@ -22,6 +22,7 @@ export default defineConfig({
       { text: '小工具', link: '/tools' },
       { text: '代码片段', link: '/snippets/' },
       { text: '云之家个性化开发', link: '/yunzhijia' },
+      { text: '云之家计算公式', link: '/yunzhijia-formulas' },
       { text: '捐赠', link: '/donate' }
     ],
 
