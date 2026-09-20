@@ -10,7 +10,7 @@ title: 设置字段状态
 
 ## API
 
-`cf.form.setFieldState(codeIdOrTitle, state)`，成功返回 `true`。常用 state：`'hidden'`、`'readOnly'`。
+`cf.form.setFieldState(codeIdOrTitle, state)`，成功返回 `true`。合法状态共**四种**（源码 `formDesign/validate.ts` 的 `WidgetStateArray`）：`'hidden'`、`'readOnly'`、`'editable'`、`'required'`。
 
 ## 示例
 

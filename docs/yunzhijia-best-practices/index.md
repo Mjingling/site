@@ -20,3 +20,10 @@ description: 云之家智能审批个性化开发的典型场景与完整可抄�
 | [字段联动显隐](/yunzhijia-best-practices/05-field-linkage) | 按字段值/节点动态控制显隐与只读 |
 | [智能退回拦截](/yunzhijia-best-practices/06-smart-return-block) | 不允许智能退回的单据 |
 | [明细自动汇总填充](/yunzhijia-best-practices/07-detail-autofill) | 明细变化自动算合计、回填主表 |
+| [动态必填控制](/yunzhijia-best-practices/08-dynamic-required) | 字段状态四态：按条件动态必填/恢复可编辑 |
+| [机器人与结束节点处理](/yunzhijia-best-practices/09-robot-end-node) | 机器人节点跳过 UI、结束节点归档通知 |
+| [提交后跳转与刷新](/yunzhijia-best-practices/10-after-submit-redirect) | cf.route 自动刷新/跳下一单 |
+| [明细抽屉事件](/yunzhijia-best-practices/11-detail-drawer-events) | 抽屉打开前/保存/取消的拦截与埋点 |
+| [表单设计器属性注入](/yunzhijia-best-practices/12-form-designer) | 设计时批量微调控件属性 |
+
+> 标注：08–12 篇的能力点挖掘自 SDK 源码（`src/formDesign`、`src/flowdesign`、`src/events`、`src/types`），官方文档尚未展开，使用前建议按文中提示在运行时打印确认。
