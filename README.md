@@ -84,6 +84,8 @@ date: 2026-09-20
 | 小工具 / 友链 / 交换友链说明 | `docs/tools.md` |
 | 捐赠按钮 / 收款码 / 公众号引流 | `docs/donate.md` |
 | 片段总览页文案 | `docs/snippets/index.md` |
+| 计算公式函数手册 | `docs/yunzhijia-formulas/` 下新增 md（命名 `NN-函数名.md`，顶部写 `title`），侧边栏自动生成（需重启 dev / 重新构建） |
+| 云之家个性化开发板块 | `docs/yunzhijia.md` |
 | 新增片段 | `docs/snippets/` 下新建 md |
 | 片段索引生成逻辑 | `scripts/gen-snippets-index.mjs` |
 | RSS 站点信息 | `scripts/gen_rss.py` 顶部常量 |

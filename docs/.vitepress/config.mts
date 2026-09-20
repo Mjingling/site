@@ -1,3 +1,6 @@
+import fs from 'node:fs'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineConfig } from 'vitepress'
 
 // base 自适应：
@@ -5,6 +8,23 @@ import { defineConfig } from 'vitepress'
 // - CI（.github/workflows/deploy.yml）通过环境变量 BASE_PATH 传入：
 //   仓库为「用户名.github.io」→ '/'，否则 → '/仓库名/'
 const base = process.env.BASE_PATH || '/'
+
+// 「云之家计算公式」侧边栏：按文件名顺序自动生成 docs/yunzhijia-formulas/ 下的函数页
+// （新增函数 md 后需重启 dev / 重新构建，侧边栏才会刷新）
+function formulaSidebar() {
+  const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../yunzhijia-formulas')
+  if (!fs.existsSync(dir)) return []
+  return fs
+    .readdirSync(dir)
+    .filter((f) => f.endsWith('.md') && f !== 'index.md')
+    .sort()
+    .map((f) => {
+      const text =
+        /^title:\s*"(.+)"$/m.exec(fs.readFileSync(path.join(dir, f), 'utf-8').slice(0, 300))?.[1] ??
+        f.replace(/\.md$/, '')
+      return { text, link: `/yunzhijia-formulas/${f.replace(/\.md$/, '')}` }
+    })
+}
 
 export default defineConfig({
   lang: 'zh-CN',
@@ -22,11 +42,16 @@ export default defineConfig({
       { text: '小工具', link: '/tools' },
       { text: '代码片段', link: '/snippets/' },
       { text: '云之家个性化开发', link: '/yunzhijia' },
-      { text: '云之家计算公式', link: '/yunzhijia-formulas' },
+      { text: '云之家计算公式', link: '/yunzhijia-formulas/' },
       { text: '捐赠', link: '/donate' }
     ],
 
     socialLinks: [{ icon: 'github', link: 'https://github.com/Mjingling' }],
+
+    // 云之家计算公式：函数手册侧边栏（自动生成）
+    sidebar: {
+      '/yunzhijia-formulas/': [{ text: '计算公式函数手册', items: formulaSidebar() }]
+    },
 
     // 本地全文搜索：结果直接展示代码内容（detailedView），界面已汉化
     search: {
