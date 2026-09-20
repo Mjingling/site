@@ -6,6 +6,7 @@ import BackToTop from './components/BackToTop.vue'
 import HeroAurora from './components/HeroAurora.vue'
 import Typewriter from './components/Typewriter.vue'
 import SiteFooter from './components/SiteFooter.vue'
+import NotFound from './components/NotFound.vue'
 
 const { Layout } = DefaultTheme
 const route = useRoute()
@@ -39,6 +40,11 @@ onMounted(async () => {
     </template>
     <template #home-hero-actions-after>
       <Typewriter />
+    </template>
+
+    <!-- 自定义中文 404 页 -->
+    <template #not-found>
+      <NotFound />
     </template>
   </Layout>
 </template>
