@@ -36,9 +36,11 @@ function sectionSidebar(section: string, categories: SectionCategories, label: s
   if (!fs.existsSync(dir)) return []
 
   const toItem = (fullPath: string, link: string) => ({
+    // 兼容带引号（"标题"）与不带引号（标题）两种 frontmatter 写法
     text:
-      /^title:\s*"(.+)"$/m.exec(fs.readFileSync(fullPath, 'utf-8').slice(0, 300))?.[1] ??
-      path.basename(fullPath, '.md'),
+      /^title:\s*(?:"([^"\r\n]+)"|'([^'\r\n]+)'|([^\r\n]+?))\s*$/m.exec(
+        fs.readFileSync(fullPath, 'utf-8').slice(0, 300)
+      )?.slice(1).find(Boolean) ?? path.basename(fullPath, '.md'),
     link
   })
 
