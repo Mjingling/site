@@ -9,21 +9,47 @@ import { defineConfig } from 'vitepress'
 //   仓库为「用户名.github.io」→ '/'，否则 → '/仓库名/'
 const base = process.env.BASE_PATH || '/'
 
-// 「云之家计算公式」侧边栏：按文件名顺序自动生成 docs/yunzhijia-formulas/ 下的函数页
-// （新增函数 md 后需重启 dev / 重新构建，侧边栏才会刷新）
+// 「云之家计算公式」侧边栏：总览置顶，函数按分类目录（与 cloudflow 源码
+// FormFormula/functions/ 的分类一致）自动分组；新增 md 后需重启 dev / 重新构建
+const FORMULA_CATEGORIES: Array<[dir: string, label: string]> = [
+  ['math', '数学函数'],
+  ['date', '日期函数'],
+  ['text', '文本函数'],
+  ['logic', '逻辑函数'],
+  ['advanced', '高级函数'],
+  ['data', '数据函数']
+]
+
 function formulaSidebar() {
   const dir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../yunzhijia-formulas')
   if (!fs.existsSync(dir)) return []
-  return fs
+
+  const toItem = (fullPath: string, link: string) => ({
+    text:
+      /^title:\s*"(.+)"$/m.exec(fs.readFileSync(fullPath, 'utf-8').slice(0, 300))?.[1] ??
+      path.basename(fullPath, '.md'),
+    link
+  })
+
+  const overview = fs
     .readdirSync(dir)
     .filter((f) => f.endsWith('.md') && f !== 'index.md')
     .sort()
-    .map((f) => {
-      const text =
-        /^title:\s*"(.+)"$/m.exec(fs.readFileSync(path.join(dir, f), 'utf-8').slice(0, 300))?.[1] ??
-        f.replace(/\.md$/, '')
-      return { text, link: `/yunzhijia-formulas/${f.replace(/\.md$/, '')}` }
+    .map((f) => toItem(path.join(dir, f), `/yunzhijia-formulas/${f.replace(/\.md$/, '')}`))
+
+  const groups = FORMULA_CATEGORIES.filter(([cat]) => fs.existsSync(path.join(dir, cat))).map(
+    ([cat, label]) => ({
+      text: label,
+      collapsed: true,
+      items: fs
+        .readdirSync(path.join(dir, cat))
+        .filter((f) => f.endsWith('.md'))
+        .sort()
+        .map((f) => toItem(path.join(dir, cat, f), `/yunzhijia-formulas/${cat}/${f.replace(/\.md$/, '')}`))
     })
+  )
+
+  return [{ text: '总览', items: overview }, ...groups]
 }
 
 export default defineConfig({
