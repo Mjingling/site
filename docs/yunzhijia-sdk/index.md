@@ -51,3 +51,7 @@ cf.ready(function () {
 ```
 
 更多完整场景见 [最佳实践](/yunzhijia-best-practices/)。
+
+## 配套工具
+
+编写 SDK 代码时推荐搭配我的 VSCode 插件 **vscode-cloudflow-js-sdk-completion**：API 智能补全、参数签名、文档提示和代码片段一步到位，见 [小工具页](/tools)。
